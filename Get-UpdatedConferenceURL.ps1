@@ -56,7 +56,7 @@ function Get-UpdatedConferenceURL
         $simpleUrl = ((Get-CsSimpleUrlConfiguration).SimpleUrl | where { $_.component -eq "Meet" -and $_.domain -eq $sipDomain }).ActiveUrl
 
     # find primary server that user is homed on
-        $primaryUserServer = (Get-CsUserPoolInfo $csUser.identity).PrimaryPoolPrimaryRegistrar
+        $primaryUserServer = (Get-CsUserPoolInfo $csUser.identity).PrimaryPoolPrimaryRegistrar.ToString()
     # get conferences from RTCLOCAL DB
         $conferences = Query-ConferenceDB -sipAddress $sipAddress -primaryUserServer $primaryUserServer
     # for each conference, output DB content, plus full meeting link
